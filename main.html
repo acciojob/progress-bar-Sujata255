@@ -1,16 +1,77 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
-	<link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+  <div class="progress-bar">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+  </div>   
 
+
+  <button id="prev">Prev</button>
+  <button id="next">Next</button>
+
+  <script type="text/javascript" src="./script.js"></script>
 </body>
 
-</html>
+</html>   
+
+
+<script>
+const circles = document.querySelectorAll('.circle');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+
+let currentActive   
+ = 0;
+
+// Initially disable the previous button
+prevBtn.disabled = true;
+
+// Function to update the progress bar
+function updateProgressBar() {
+  circles.forEach((circle, index) => {
+    if (index < currentActive) {
+      circle.classList.add('active');
+    } else {
+      circle.classList.remove('active');   
+
+    }
+  });
+
+  // Update   
+ button states
+  if (currentActive === 0) {
+    prevBtn.disabled = true;
+  } else {
+    prevBtn.disabled = false;
+  }
+
+  if (currentActive === circles.length - 1) {
+    nextBtn.disabled = true;
+  } else {
+    nextBtn.disabled = false;
+  }
+}
+
+// Event listeners for buttons
+nextBtn.addEventListener('click', () => {
+  currentActive++;
+  updateProgressBar();
+});
+
+prevBtn.addEventListener('click', () => {
+  currentActive--;
+  updateProgressBar();
+});
+
+// Initial update
+updateProgressBar();
+</script>
